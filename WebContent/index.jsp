@@ -33,7 +33,7 @@
 					<table class="contentLinks">
 						<tr id="contentRow">
 							<td onclick="showCategory('experience',event)"
-								style="background-color: #E6E6E6;">Andrew's Experience</td>
+								style="background-color: #E6E6E6;">Experience</td>
 							<td onclick="showCategory('education',event)">Education</td>
 							<td onclick="showCategory('projects',event)">Projects</td>
 							<td onclick="showCategory('courses',event)">Relevant Courses</td>
@@ -41,6 +41,11 @@
 					</table> <br>
 					<div id="experience" style="padding: 10px">
 						<section class="contentTab">
+							<b>Software Development Engineer </b><span class="shadow curved">January,
+								2013 - present</span> <br /> <i>Amazon Marketplace</i><br /> 
+							<br />
+							<p>  Performed front-end development for Amazon Marketplace.  Gained extensive experience with
+							tomcat, JSP pages, and core java development.</p>
 							<b>SDE Intern </b><span class="shadow curved">May-August
 								2012</span><br /> <i>Amazon Wireless</i><br />
 							<br />
