@@ -1,0 +1,16 @@
+<Context>
+
+    <Resource
+        name="practice/names"
+        auth="Container"
+        driverClassName="com.myspl.idbc.Driver"
+        logAbandoned="true"
+        maxActive="50"
+        maxIdle="30"
+        maxWait="10000"
+        password="Coolio12"
+        type="javax.sql.DataSource"
+        url="jdbc:mysql://localhost:3306/Tomcat_Practice?autoReconnect=true"
+        username="root" />
+
+</Context>
