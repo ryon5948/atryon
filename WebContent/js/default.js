@@ -42,7 +42,7 @@ var viewManager = {};
 	    };
 	    
 	    this.scrollToAnchor = function(id) {
-	    	var topOffset = 145;
+	    	var topOffset = 50;
 	    	var aTag = $("a[name='" + id + "']");
 	    	$('html,body').animate({
 	    		scrollTop : aTag.offset().top - topOffset
@@ -127,4 +127,3 @@ function randomColor(element) {
 	
 	$(element).css('color','rgb('+r+','+g+','+b+')');
 }
-

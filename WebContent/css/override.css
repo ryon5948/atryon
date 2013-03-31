@@ -21,7 +21,7 @@
 }
 
 .content-table td.left-table-pane {
-	padding-top: 150px;
+	padding-top: 50px;
 	width: 70%;
 	border-right: solid 1px #E6E6E6;
 }
@@ -41,22 +41,18 @@
 
 .fixed-header-div {
 	position: fixed;
-	background-color: #fff;
+	background-color: transparent;
+	-webkit-perspective: 1000;
+    -webkit-backface-visibility: hidden;
 }
 
 .fixed-top-nav {
-	padding: 50px 0px 40px 0px;
+	padding: 10px 0px 10px 0px;
 	max-width: 800px;
 	width: 100%;
 	background-color: #fff;
 	position: fixed;
 	border-bottom: solid 1px #E6E6E6;
-}
-
-li.item:hover {
-	font-size: 16px;
-	background-color: #fff;
-	padding: 0px;
 }
 
 li.item {
@@ -117,6 +113,32 @@ ul#courseList,ul#courseList>li {
 	z-index:100;
 }
 
+img.me {
+	border:solid 1px #E6E6E6;
+	border-radius:360px;
+	-webkit-border-radius: 360px;
+	/* Firefox 1-3.6 */
+	-moz-border-radius: 360px;
+	/* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+	width:50px;
+	margin-left:315px;
+}
+
+@-webkit-keyframes spin {  
+from {  
+    -webkit-transform: rotate(0deg);  
+}  
+to {  
+    -webkit-transform: rotate(360deg);  
+    } 
+}
+
+.wheel{
+    -webkit-animation-name: spin; 
+    -webkit-animation-iteration-count: 1; 
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-duration: .3s;
+}
 @media only screen and (max-device-width: 480px) {
 	.fixed-top-nav {
 		
