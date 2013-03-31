@@ -1,49 +1,130 @@
+/**
+ * ViewManager manages all window resizing events and fluid layout processing
+ */
+
+// MODEL
+var viewManager = {};
+(function() {
+	    $win = $(window);
+	    	    
+	    this.switchToSmallScreenView = function () {
+	    	var windowSize = $win.width();
+	    	$headerSmall = $(".header-small");
+	    	$leftPane = $("#left-pane");
+	    	$links = $(".content-links");
+
+	    	if (windowSize < 800 || navigator.platform.indexOf("android")>=0)
+	    		{
+	    		// Hide fixed right pane
+	    		$(".right-table-pane").hide();
+	    		$("ul.fixed-top-nav").hide();
+
+	    		// Remove margins from left pane
+	    		$leftPane.removeClass('left-table-pane').addClass(
+	    				'left-table-pane-small');
+	    		$headerSmall.show().css('display', 'block');
+
+	    		// Move links to the top
+	    		$headerSmall.append($links);
+	    		$links.css('text-align', 'left');
+
+	    	} else {
+	    		// Default desktop view (revert above changes)
+	    		$headerSmall.hide();
+	    		$leftPane.removeClass('left-table-pane-small').addClass(
+	    				'left-table-pane');
+	    		$(".right-table-pane").show();
+	    		$("ul.fixed-top-nav").show();
+	    		$(".fixed-header-div").append($links);
+	    		$links.css('text-align', 'right');
+
+	    	}
+	    };
+	    
+	    this.scrollToAnchor = function(id) {
+	    	var topOffset = 145;
+	    	var aTag = $("a[name='" + id + "']");
+	    	$('html,body').animate({
+	    		scrollTop : aTag.offset().top - topOffset
+	    	}, 'slow');
+	    	
+	    };
+	    
+	    this.fixHeaderToCenter = function() {
+	    	$div = $('.fixed-header-div');
+	    	var midDiv = $div.height()/2;
+	    	var diff = getCenterOfWindow()-midDiv;
+	    	if(diff > 125){
+	    		$div.css('top', diff);
+	    		}
+	    }
+	}).apply(viewManager);
+
+// Controller
+$(window).resize(function() {
+	viewManager.switchToSmallScreenView();
+	viewManager.fixHeaderToCenter();
+});
+
+$(window).scroll(function(){
+});
+
+$(document).ready(function() {
+	// Incase window is tablet/phone size
+	viewManager.switchToSmallScreenView();
+	
+	// Fix the right pane div to the middle of screen (y axis)
+	viewManager.fixHeaderToCenter();
+
+	// Replace email with
+	$('a#email').click(function() {
+		window.location.href = 'mailto:ryon5948@aol.com';
+	});
+	
+	// Animate about me
+	$p = $("p.about_me");
+	$p.hover(function() {
+        $(this).animate({color: "#888888"});
+        // Generates random color
+        $(".colorize").each(function(){
+    		randomColor($(this));
+    	});
+	},
+	function(){
+		$("p.about_me,span.colorize").animate({color: "#000"});
+	});
+	
+	// On click scroll feature
+	$('.about,.experience,.education,.projects,.courses').click(
+			function(){
+				viewManager.scrollToAnchor($(this).attr('class'));
+			}
+	);
+	
+    $('.item').mouseover(function() {
+        $(this).animate({
+           textDecoration: "underline"
+        }, 'fast');
+    });
+    
+    $('.item').mouseout(function() {
+        $(this).animate({
+            textDecoration: "none"
+        }, 'fast');
+    });
+	
+});
+
+function getCenterOfWindow() {
+	return $(window).height()/2;
+}
+
 // View
-function showCategory(category,event)
-{
-	if(!event){ event = window.event;}
+function randomColor(element) {
+	var r = Math.floor((Math.random()*255)+1);
+	var g = Math.floor((Math.random()*255)+1);
+	var b = Math.floor((Math.random()*255)+1);
 	
-	$("#experience").hide();
-	$("#projects").hide();
-	$("#education").hide();
-	$("#courses").hide();
-	$("#"+category).fadeIn('fast');
-	$("#contentRow").children().css("background-color","#fff");
-	$(event.target).css("background-color", "#E6E6E6");
+	$(element).css('color','rgb('+r+','+g+','+b+')');
 }
 
-function showDescription(event)
-{
-	if(!event){ event = window.event;}
-	
-	$(".classDescription").remove();
-	$(event.target).before('<div class="classDescription shadow">' + event.target.getAttribute('data') + "</div>");
-}
-
-// Control
-
-function checkForOverlap()
-{
-		   var wrapper = document.getElementById('wrapper');
-		   var sidebar = document.getElementById('sideBar');
-		   
-		   if ((wrapper.offsetLeft) <= (sidebar.offsetLeft + 50) && window.innerWidth <= 1250) {
-		      sidebar.style.height = "100%";
-		      sidebar.style.left = "0px";
-		      sidebar.style.top = "30px";
-		      wrapper.style.marginLeft = "50px";
-		      wrapper.style.marginRight = "0px";
-		      wrapper.style.width = "90%";
-		      wrapper.style.maxWidth = "1100px";
-		   }
-		   else{
-			  sidebar.style.left = "25px";
-		      sidebar.style.top = "237px";
-			  sidebar.style.height = "";
-		      wrapper.style.maxWidth = "1000px";
-		      wrapper.style.margin = "0px auto";
-		   }
-}
-
-window.onresize = checkForOverlap;
-window.onload = checkForOverlap;
