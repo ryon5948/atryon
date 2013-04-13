@@ -89,8 +89,10 @@ function affixLinks()
 	if(!isScrolledIntoView($links))
 	{
 		$links.addClass("affixedLinks shadow");
+		$intro.css("margin-top","350px")
 	}
 	else if (isScrolledIntoView($intro)) {
 		$links.removeClass("affixedLinks shadow");
+		$intro.css("margig-top","0px");
 	}
 }
