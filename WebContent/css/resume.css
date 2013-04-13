@@ -1,0 +1,126 @@
+@CHARSET "UTF-8";
+
+a, a:hover {
+	color:#000;
+	text-decoration:none;
+}
+
+@font-face {
+    font-family: 'HeydingsIconsRegular';
+    src: url('heydings_icons.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+abbr {
+	font-family:'HeydingsIconsRegular';
+	font-size: 120px;
+	font-weight:normal;
+	position:relative;
+	top:35px;
+	margin:100px;
+	-moz-transition: all 1s ease;
+	-webkit-transition: all 1s ease;
+	-o-transition: all 1s ease;
+	transition: all 1s ease;
+}
+
+abbr:hover {
+	opacity:.3;
+	cursor: pointer;
+}
+
+
+body {
+	background-image: url("../img/kindajean.png");
+	background-repeat: repeat;
+	background-attachment:fixed;
+	min-width:780px;
+}
+
+#intro {
+	width:0px;
+	text-align:center;
+	white-space:nowrap;
+	overflow:hidden;
+	padding:50px 0px 50px 0px;
+	position:absolute;
+	left:0px;
+}
+
+#intro h1 {
+	font-family: 'Poiret One', cursive;
+	font-size:37px;
+	font-weight:lighter;
+	line-height:60px;
+}
+
+.fixed-header {
+	padding: 0px 250px 0px 250px;
+	background: url(../img/cover-photo.png) -500px 0px no-repeat;
+	background-color: #fff;
+	background-position-x:-500px;
+	background-size:cover;
+	border-bottom:solid 1px #888;
+}
+
+section.main_content {
+	margin:auto;
+	max-width:800px;
+	padding:50px 0px 50px 0px;
+	text-align:center;
+}
+
+section.main_content span {
+	font-family: 'Poiret One', cursive;
+	font-size:16px;
+	display:none;
+}
+
+ul.content-links {
+	opacity:0;
+	text-align:center;
+	padding-top:20px;
+}
+
+ul.content-links img {
+	height:20px;
+	width:20px;
+}
+
+ul.affixedLinks {
+	top:0px;
+	position:fixed;
+	background-color:#fff;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	padding:10px 0px 10px 0px;
+	border-bottom: solid 1px grey;
+	opacity:1;
+	display:none;
+}
+
+.my-design-img {
+	width:100px;
+	margin:10px;
+}
+
+span[class^="wh"] {
+	cursor:pointer;
+	display:inline-block;
+	display:-moz-inline-stack;
+}
+
+.shadow {
+	box-shadow: 0px 1px 5px #888;
+	-moz-box-shadow: 0px 1px 5px #888;
+	-webkit-box-shadow: 0px 1px 5px #888;
+}
+
+footer {
+	height:100px;
+	color:#fff;
+	padding:100px;
+	background-color:#000;
+	margin-top:100px;
+}
