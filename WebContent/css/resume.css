@@ -1,8 +1,14 @@
 @CHARSET "UTF-8";
 
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color:
+}
+
 a, a:hover {
 	color:#000;
 	text-decoration:none;
+	cursor:pointer;
 }
 
 @font-face {
@@ -10,15 +16,13 @@ a, a:hover {
     src: url('heydings_icons.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    color:#fff;
 }
 
 abbr {
 	font-family:'HeydingsIconsRegular';
-	font-size: 120px;
+	font-size: 30px;
 	font-weight:normal;
-	position:relative;
-	top:35px;
-	margin:100px;
 	-moz-transition: all 1s ease;
 	-webkit-transition: all 1s ease;
 	-o-transition: all 1s ease;
@@ -35,82 +39,73 @@ body {
 	background-image: url("../img/kindajean.png");
 	background-repeat: repeat;
 	background-attachment:fixed;
-	min-width:780px;
+}
+
+div.fixed-header {
+	text-align:center;
+	min-height:600px;
 }
 
 #intro {
 	width:0px;
-	text-align:center;
 	white-space:nowrap;
 	overflow:hidden;
-	padding:50px 0px 50px 0px;
-	position:absolute;
-	left:0px;
+	padding:60px 0px 50px 0px;
+	float:right;
 }
 
-#intro h1 {
-	font-family: 'Poiret One', cursive;
-	font-size:37px;
-	font-weight:lighter;
-	line-height:60px;
+#intro img {
+	width:700px;
+	margin-top:50px;
+	border:solid 1px grey;
 }
 
-.fixed-header {
-	padding: 0px 250px 0px 250px;
-	background: url(../img/cover-photo.png) -500px 0px no-repeat;
-	background-color: #fff;
-	background-position-x:-500px;
-	background-size:cover;
-	border-bottom:solid 1px #888;
+#intro > span {
+	font-size:30px;
+	color:#000;
+	text-align:center;
+	display:inline-block;
+	font-weight:bold;
+	font-family: Poiret One, cursive;
+	line-height:90px;
+	overflow:hidden;
 }
+
 
 section.main_content {
-	margin:auto;
-	max-width:800px;
-	padding:50px 0px 50px 0px;
-	text-align:center;
+	min-width:800px;
+	margin:20px 150px 70px 150px;
+	border-top:solid 1px grey;
+	font-weight:bold;
 }
 
-section.main_content span {
-	font-family: 'Poiret One', cursive;
-	font-size:16px;
-	display:none;
+section.main_content > span {
+	display:block;
+	margin:20px 100px 20px 10px;
+	font-size:25px;
 }
 
 ul.content-links {
-	opacity:0;
-	text-align:center;
-	padding-top:20px;
-}
-
-ul.content-links img {
-	height:20px;
-	width:20px;
-}
-
-ul.affixedLinks {
-	margin-top:0px;
-	top:0px;
+	padding-top:30px;
 	position:fixed;
-	background-color:#fff;
-	border-bottom-right-radius: 10px;
-	border-bottom-left-radius: 10px;
-	padding:10px 0px 10px 0px;
-	border-bottom: solid 1px grey;
-	opacity:1;
+	left:0px;
+	min-height:900px;
 	display:none;
+	list-style: none;
 }
 
-.my-design-img {
-	width:100px;
-	margin:10px;
+ul.content-links li {
+		padding:20px;
 }
 
-span[class^="wh"] {
+span.what_I_do {
 	cursor:pointer;
-	display:inline-block;
-	display:-moz-inline-stack;
-
+	position:relative;
+	white-space:nowrap;
+	font-size:90px;
+	letter-spacing:-9px;
+	padding:0px 10px 20px 0px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .shadow {
@@ -124,5 +119,58 @@ footer {
 	color:#fff;
 	padding:100px;
 	background-color:#000;
-	margin-top:100px;
 }
+
+blockquote {
+	width:100%;
+	max-width:800px;
+	text-align:center;
+}
+
+span#quotes {
+	margin:70px 0px 70px 0px;
+	display:block;
+}
+
+table.timeline {
+	margin-right:auto;
+	margin-left:auto;
+	border-collapse: collapse;
+}
+
+table.timeline td {
+	padding-left:50px;
+}
+
+table.timeline tr:last-child {
+	border-bottom:solid 1px grey;
+}
+
+table.timeline tr:first-child {
+	border-top:solid 1px grey;
+}
+
+td.year {
+	border-right:solid 1px grey;
+	padding-right:50px;
+	font-size:23px;
+	font-family: Poiret One, cursive;
+	text-align:right;
+}
+
+div.ball {
+	height:8px;
+	width:8px;
+	border-radius: 360px;
+	background-color:#000000;
+	position:relative;
+	left:-54px;
+	display:inline-block;
+	bottom:3px;
+}
+ 
+section#resume img {
+	margin:50px;
+	width:100px;
+}
+

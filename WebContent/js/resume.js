@@ -3,10 +3,9 @@
  *  Javascript file for my portfolio website.
  */
 
-
-var whoIam = [ "not Drew", "not Andy", "not Ryan", "Andrew" ];
+var quotes = [ "\"quote1\"", "\"quote2\"", "\"quote3\"" ];
 var whatIdo = [ "beat the drums", "play the guitar", "write programs","hit tennis balls", "make neat stuff", "design websites" ];
-var wia = 0;
+var quotesCounter = 0;
 var wid = 0;
 
 // Keeps track of where the intro should be in relation to the top of the window.
@@ -17,51 +16,47 @@ $window = $(window);
 
 $(document).ready(function() {
 	
-	// Vertically centers intro text
-	centerToWindow("#intro");
+	//FadeIn quotes
+	window.setInterval('fadeInQuotes()', 8000);
 	
 	// Animate social network links
 	slideInPage("#intro");
 
 	// Change "who I am"/"what I do" on mouseenter
-	$(".who_I_am").mouseenter(function() {
-		toggleText(this, whoIam, wia);
-	});
 	$(".what_I_do").mouseenter(function() {
-		toggleText(this, whatIdo, wid);
+		toggleWhat();
 	});
 	
 	// makes sketch fixed div the window size
 	$(".fixed-header").height($window.height());
 	
 	// Sets the correct opacity
-	slowScrollHeader();
+	slowScrollElements();
+	
+	// Smooth scrolling for left panel links
+	$(".content-links a").click(function(event){		
+		event.preventDefault();
+		$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
+	});
+	
+	$(".year").hover(function(e){
+		$(e.target).next().children().animate({width:"12px",height:"12px",left:"-56px"});
+	},
+	function(e){
+		$(e.target).next().children().animate({width:"8px",height:"8px",left:"-54px"});
+	});
 	
 });
 
 $window.resize(function() {
-	affixLinks();
-	
-	// makes sketch fixed div the window size
-	$(".fixed-header").height($window.height());
-	
-	centerToWindow("#intro");
-	
+		
 	// change opacity in the case of window resize
-	slowScrollHeader();
+	slowScrollElements();
 });
 
 $window.scroll(function(e) {
-	affixLinks();
-	slowScrollHeader();
+	slowScrollElements();
 });
-
-function centerToWindow(elem)
-{
-	$elem = $(elem);
-	introTop = $window.height()/2 - $elem.height()/2 - 100;
-	$elem.css("margin-top", introTop);
-}
 
 // Slides in the first section contains the intro text, and fades in
 // content-links
@@ -73,9 +68,9 @@ function slideInPage(elem) {
 		{
 				$.when($elem.animate({width : "100%"}, "slow")).done(
 					function(){
-					$elem.css("white-space", "inherit").css("overflow", "inherit");
-					$social_links.animate({ opacity : 1 }, "slow");
-						});
+						$elem.css("white-space", "inherit").css("overflow", "inherit");
+						$social_links.fadeIn("slow");
+					});
 		}
 }
 
@@ -87,24 +82,21 @@ function randomColor($element) {
 	$element.css('color', 'rgb(' + r + ',' + g + ',' + b + ')');
 }
 
-// Cycles through both arrarys of text
-function toggleText(elem, array, counter) {
+function toggleWhat() {
 	
-	$elem = $(elem);
-	var height = $elem.height();
-	if ($elem.is(":animated") == false) { // Keeps animation from replaying on
-											// multiple mouseenters
-		$.when($elem.animate({height : "0px"}, "fast"))
+	$elem = $(".what_I_do");
+	if ($elem.is(":animated") == false) 
+	{ // Keeps animation from replaying on multiple mouseenters
+		$elem.css({left:"inherit"});
+		$.when($elem.animate({right : "100%"}, "slow"))
 			.done(function() {
-				$elem.text(array[counter]);
-				$(elem).animate({height : height}, "fast"); // Must use $() to make sure 
-				var length = array.length;					// the newest version of the element
-															// is retrieved
-				if (length != 4) {
-					wid = (wid >= length - 1) ? 0 : wid + 1;
-				} else {
-					wia = (wia >= length - 1) ? 0 : wia + 1;
-				}
+				$elem.css({right:"0%"}).css({left:"100%"});
+				$elem.text(whatIdo[wid]);
+				$elem.animate({left : "0%"}, "slow"); 
+				if(wid == 5)				
+					wid=0;
+				else
+					wid++;
 
 			randomColor($elem);
 		});
@@ -115,53 +107,35 @@ function isScrolledIntoView(elem) {
 	
 	var docViewTop = $window.scrollTop();
 	var elemTop = $(elem).offset().top;
-	return (elemTop >= docViewTop);
+	var height = elem.height();
+	return (elemTop+ height >= docViewTop);
 }
 
-function affixLinks() {
-	// Shows the links in a fixed menu up top
-	$social = $("#social-links");
-	$affix = $(".affixedLinks");
-	var isInView = isScrolledIntoView($social);
 
-	if (!isInView) {
-		if ($affix.length == 0) {
-			$("body").append($social.clone().children("ul").addClass("affixedLinks").css("margin-top", "0px"));
-			$affix = $(".affixedLinks");
-			$affix.css("left", $window.width() / 2 - $affix.width() / 2);
-			$affix.fadeIn("slow");
-		}
-	} else {
-		$affix.fadeOut();
-		$affix.remove();
-	}
-	$affix.css("left", $window.width() / 2 - $affix.width() / 2);
-}
-
-function slowScrollHeader()
+function slowScrollElements()
 {
 	var top = $window.scrollTop();
-	$fixedHeader = $(".fixed-header");
-	$intro = $("#intro");
-	$introChildren = $intro.children();
-	var introHeight = $intro.height();
-	var section = $fixedHeader.next("section").offset().top;
-	var fixedHeaderY = "-500px " + top/2 + "px";
-	var introY = top/3 + introTop;
-	var diff = introHeight + $intro.offset().top - section + 200;
-	var opacity = 1 - diff/100;
+	$fixedLinks = $(".content-links");
+	var headerY = -top/10;
 	
 	// Change y positions
-	$intro.css({ marginTop: introY });
-	$fixedHeader.css({backgroundPosition: fixedHeaderY });
-		
-	// Slowly changes the opacity of the header text
-	if( diff >= 0 )
-		{
-			$introChildren.css("opacity", opacity);
-		}
-	else
-		{
-			$introChildren.css("opacity", 1);
-		}
+	$fixedLinks.css({ top: headerY });
 }
+
+
+function fadeInQuotes()
+{
+	$quotes = $("#quotes");
+	
+	$.when($quotes.fadeOut("slow")).done(function(){
+		if(quotes.length-1 == quotesCounter)
+			quotesCounter = 0;
+		else
+			quotesCounter++;
+		
+		$quotes.html(quotes[quotesCounter]);
+		$quotes.fadeIn("slow");
+	});
+}
+
+
